@@ -1,21 +1,7 @@
 ---
 title: README
 ---
-<p align='center'> <img alt='Black Candy logo' width='200' src='<https://raw.githubusercontent.com/blackcandy-org/black_candy/master/app/assets/images/logo.svg>'> </p>
-
 # Black Candy
-
-[![CI](https://github.com/blackcandy-org/black_candy/actions/workflows/ci.yml/badge.svg)](https://github.com/blackcandy-org/black_candy/actions/workflows/ci.yml) [![Coverage Status](https://coveralls.io/repos/github/blackcandy-org/blackcandy/badge.svg?branch=master)](https://coveralls.io/github/blackcandy-org/black_candy?branch=master) [![Ruby Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/testdouble/standard) ![Docker Pulls](https://img.shields.io/docker/pulls/blackcandy/blackcandy)
-
-![Screenshot](https://raw.githubusercontent.com/blackcandy-org/blackcandy/master/docs/images/screenshot_main.png)
-
-Black Candy is a self-hosted music streaming server, your personal music center.
-
-## Try The Demo
-
-Please visit <https://demo.blackcandy.org> and use demo user (email: [admin@admin.com](mailto:admin@admin.com), password: foobar) to log in. And feel free to try it.
-
-> \[!NOTE\] This demo user does not have administrator privileges. So you cannot experience all the features in Black Candy. And all music in the demo are from [Free Music Archive](https://freemusicarchive.org/). You can check their [licenses](https://github.com/blackcandy-org/blackcandy/blob/master/docs/demo_music_licenses.md).
 
 ## Installation
 
