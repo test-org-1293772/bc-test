@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class Album < ApplicationRecord
+# album
+class Album < ApplicationRecord # head model
   UNKNOWN_NAME = "Unknown Album"
 
   include SearchableConcern
