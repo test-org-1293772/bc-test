@@ -22,6 +22,52 @@ It uses several concerns to encapsulate different parts of its logic.
 
 &nbsp;
 
+<SwmSnippet path="/app/models/artist.rb" line="6">
+
+---
+
+Some similarity in Artists
+
+```ruby
+
+  include SearchableConcern
+  include ImageableConcern
+  include SortableConcern
+
+  after_initialize :set_default_name, if: :new_record?
+
+  validates :name, presence: true
+
+  has_many :albums, dependent: :destroy
+  has_many :songs
+
+  search_by :name
+
+  sort_by :name, :created_at
+
+  scope :lack_metadata, -> {
+    includes(:cover_image_attachment)
+      .where(cover_image_attachment: {id: nil})
+      .where.not(name: [Artist::UNKNOWN_NAME, Artist::VARIOUS_NAME])
+  }
+
+  def unknown?
+    name == UNKNOWN_NAME
+  end
+
+  def all_albums
+    Album.joins(:songs).where("albums.artist_id = ? OR songs.artist_id = ?", id, id).distinct
+  end
+
+  def appears_on_albums
+    Album.joins(:songs).where("albums.artist_id != ? AND songs.artist_id = ?", id, id).distinct
+  end
+```
+
+---
+
+</SwmSnippet>
+
 ## User model
 
 User's are also important.
@@ -43,5 +89,11 @@ User's are also important.
 ---
 
 </SwmSnippet>
+
+&nbsp;
+
+\\
+
+&nbsp;
 
 <SwmMeta version="3.0.0" repo-id="Z2l0aHViJTNBJTNBYmMtdGVzdCUzQSUzQXRlc3Qtb3JnLTEyOTM3NzI=" repo-name="bc-test"><sup>Powered by [Swimm](https://app.swimm.io/)</sup></SwmMeta>
