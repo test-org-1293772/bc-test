@@ -8,17 +8,14 @@ class Artist < ApplicationRecord
   include ImageableConcern
   include SortableConcern
 
-  after_initialize :set_default_name, if: :new_record?
-
   validates :name, presence: true
-
   has_many :albums, dependent: :destroy
   has_many :songs
 
+  after_initialize :set_default_name, if: :new_record?
+  
   search_by :name
-
   sort_by :name, :created_at
-
   scope :lack_metadata, -> {
     includes(:cover_image_attachment)
       .where(cover_image_attachment: {id: nil})
