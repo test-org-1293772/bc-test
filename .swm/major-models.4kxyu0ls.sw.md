@@ -1,9 +1,9 @@
 ---
 title: Major models
 ---
-The <SwmToken path="/app/models/album.rb" pos="3:2:2" line-data="class Album &lt; ApplicationRecord">`Album`</SwmToken> model is one of the most important. But it doesn't stand alone.  I
+The <SwmToken path="/app/models/album.rb" pos="4:2:2" line-data="class Album &lt; ApplicationRecord # head model">`Album`</SwmToken> model is one of the most important. But it doesn't stand alone.  I
 
-<SwmSnippet path="/app/models/album.rb" line="6">
+<SwmSnippet path="/app/models/album.rb" line="7">
 
 ---
 
@@ -22,46 +22,22 @@ It uses several concerns to encapsulate different parts of its logic.
 
 &nbsp;
 
-<SwmSnippet path="/app/models/artist.rb" line="6">
+<SwmSnippet path="app/models/artist.rb" line="6">
 
 ---
 
 Some similarity in Artists
 
-```ruby
+```
 
   include SearchableConcern
   include ImageableConcern
   include SortableConcern
 
-  after_initialize :set_default_name, if: :new_record?
-
   validates :name, presence: true
-
   has_many :albums, dependent: :destroy
   has_many :songs
 
-  search_by :name
-
-  sort_by :name, :created_at
-
-  scope :lack_metadata, -> {
-    includes(:cover_image_attachment)
-      .where(cover_image_attachment: {id: nil})
-      .where.not(name: [Artist::UNKNOWN_NAME, Artist::VARIOUS_NAME])
-  }
-
-  def unknown?
-    name == UNKNOWN_NAME
-  end
-
-  def all_albums
-    Album.joins(:songs).where("albums.artist_id = ? OR songs.artist_id = ?", id, id).distinct
-  end
-
-  def appears_on_albums
-    Album.joins(:songs).where("albums.artist_id != ? AND songs.artist_id = ?", id, id).distinct
-  end
 ```
 
 ---
